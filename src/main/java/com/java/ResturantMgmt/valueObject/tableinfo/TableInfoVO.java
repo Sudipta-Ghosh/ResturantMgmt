@@ -1,4 +1,4 @@
-package com.java.ResturantMgmt.valueObject.usergroup;
+package com.java.ResturantMgmt.valueObject.tableinfo;
 
 import java.util.List;
 

@@ -14,6 +14,10 @@
 	<script src="../../js/jquery-1.8.2.min.js" type="text/javascript">	</script>
 	<script src="../../js/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8">	</script>
 	<script src="../../js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<script type='text/javascript' src='/ResturantMgmt/dwr/interface/TableInfoDWR.js'></script>
+	<script type='text/javascript' src='/ResturantMgmt/dwr/engine.js'></script>
+	<script type='text/javascript' src='/ResturantMgmt/dwr/util.js'></script>
     </head>
     <style>
         span.reference{
@@ -45,16 +49,20 @@
     		jQuery("#formElem").validationEngine();
     	});
     	
-    	function update()       {
+    	function update(){
     	
-    	 TableInfoDWR.displayTableInformation({ 
-	              async: false,
-	              callback: function(data){  
-	              alert('data--'+data);
-	              	document.getElementById("example").innerHTML=data; 
-	                $('#example').dataTable();
-	              }
-        });
+		var tableno=document.getElementById("tableno").value; 
+		var tabledescription=document.getElementById("tabledescription").value; 
+		var noofseats=document.getElementById("noofseats").value; 
+		var tablestatus=document.getElementById("tablestatus").value; 
+		var tabletype=document.getElementById("tabletype").value; 
+		 TableInfoDWR.saveTableInformation(tableno,tabledescription,noofseats,tablestatus,tabletype,{ 
+			      async: false,
+			      callback: function(data){  	              
+				 window.opener.location.reload();
+				 window.close();
+			      }
+			});
         }
 	</script>
     <body>
@@ -63,7 +71,7 @@
             <h1>Table Update</h1>
             <div id="wrapper">
                 <div id="steps">
-                    <form id="formElem" name="formElem" action="" method="post">
+                    <form id="formElem" name="formElem"  method="post">
                         <fieldset class="step">
 			<legend>Table Master</legend>
 			<p>
@@ -86,7 +94,7 @@
 				</select>
 			</p>				
 			<p>
-				<label for="tablestatus">Table Status</label>
+				<label for="tabletype">Table Type</label>
 				<input id="tabletype" name="tabletype"  class="validate[required] text-input" type="text"/>
 			</p>
                         </fieldset>
@@ -102,7 +110,7 @@
 								the form.
 							</p>
                             <p class="submit">
-                                <button id="registerButton" type="submit" >Save</button>
+                                <button id="registerButton" type="submit" onclick="javascript:update();" >Save</button>
                             </p>
                         </fieldset>
                     </form>

@@ -16,6 +16,7 @@ public class ServiceLocator {
 		properties = new HashMap<String, String>();
 		properties.put("saveuserGroup", "userGroupService");
 		properties.put("searchTableInformation", "TableInfoService");
+		properties.put("saveTableInformation", "TableInfoService");
 
 	}
 

@@ -1,10 +1,14 @@
 package com.java.ResturantMgmt.businessprocess;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import com.java.ResturantMgmt.core.businessdelegate.BusinessDelegate;
 import com.java.ResturantMgmt.dto.TTableInfo;
-import com.java.ResturantMgmt.valueObject.usergroup.TableInfoVO;
+import com.java.ResturantMgmt.valueObject.tableinfo.TableInfoVO;
 
 public class TableInfoBP {
 	BusinessDelegate objBusinessDelegate=new BusinessDelegate();
@@ -15,7 +19,7 @@ public class TableInfoBP {
 		StringBuilder stringBuilder =new StringBuilder();
 
 		 tTableInfo.setAction("searchTableInformation");
-		 tTableInfo.setEvent("Save");
+		 tTableInfo.setEvent("Search");
 
 		  stringBuilder.append("<THEAD>");
 		  stringBuilder.append("<TR>");
@@ -53,16 +57,52 @@ public class TableInfoBP {
 			 stringBuilder.append(tTableInfoOut.getTABLE_TYPE());
 			 stringBuilder.append("</TD>");
 			 stringBuilder.append("<TD>");
-			 stringBuilder.append("<img src=\"../../img/edit_property.png\" alt=\"edit property\" height=\"10\" width=\"10\">");
+			 stringBuilder.append("<a href=\"javascript:editTableInfo(\'"+tTableInfoOut.getTABLE_ID()+"\')\"><img src=\"../../img/edit_property.png\" alt=\"edit property\" height=\"20\" width=\"20\"></a>");
 			 stringBuilder.append("</TD>");
 			 stringBuilder.append("<TD>");
-			 stringBuilder.append("<img src=\"../../img/delete_property.png\" alt=\"delete property\" height=\"10\" width=\"10\">");
+			 stringBuilder.append("<a href=\"javascript:deleteTableInfo(\'"+tTableInfoOut.getTABLE_ID()+"\')\"><img src=\"../../img/delete_property.png\" alt=\"delete property\" height=\"20\" width=\"20\"></a>");
 			 stringBuilder.append("</TD>");
 			 stringBuilder.append("</TR>");
 		 }
 		  stringBuilder.append("</TBODY>");
 		 return stringBuilder.toString();
 
+	}
+
+	public String saveTableInformation(String tableno, String tabledescription,
+			String noofseat, String tableStatus, String tabletype,String createdBy,String lastUpdatedBy) {
+		// TODO Auto-generated method stub
+		
+		TTableInfo tTableInfo =new TTableInfo();
+		String result="";
+		StringBuilder stringBuilder =new StringBuilder();
+		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SS");
+		String strDate = sdf.format(cal.getTime());
+		SimpleDateFormat sdf1 = new SimpleDateFormat();
+		sdf1.applyPattern("dd/MM/yyyy HH:mm:ss.SS");
+		Date date = null;
+		try {
+			date = sdf1.parse(strDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		 tTableInfo.setAction("saveTableInformation");
+		 tTableInfo.setEvent("Save");
+		 tTableInfo.setTABLE_NO(tableno);
+		 tTableInfo.setTABLE_DESCRIPTION(tabledescription);
+		 tTableInfo.setTABLE_NO_OF_SEAT(noofseat);
+		 tTableInfo.setTABLE_STATUS(tableStatus);
+		 tTableInfo.setTABLE_TYPE(tabletype);
+		 tTableInfo.setCREATED_BY(createdBy);
+		 tTableInfo.setLAST_UPDATED_BY(lastUpdatedBy);
+		 tTableInfo.setLAST_UPDATED_DATE(date);
+		 tTableInfo.setCREATED_DATE(date);
+		 TableInfoVO tableInfoVO = (TableInfoVO) objBusinessDelegate.doProcess(tTableInfo);
+		return tableInfoVO.getMessage();
 	}
 
 }

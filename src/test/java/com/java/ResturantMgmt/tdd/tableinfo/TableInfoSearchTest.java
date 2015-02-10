@@ -5,7 +5,8 @@ import org.testng.annotations.Test;
 
 import com.java.ResturantMgmt.core.businessdelegate.BusinessDelegate;
 import com.java.ResturantMgmt.dto.TTableInfo;
-import com.java.ResturantMgmt.valueObject.usergroup.TableInfoVO;
+import com.java.ResturantMgmt.valueObject.tableinfo.TableInfoVO;
+
 
 
 
@@ -16,9 +17,9 @@ public class TableInfoSearchTest {
 	TTableInfo tTableInfo =new TTableInfo();
 	 @Test(groups = { "TableInfoSearchTest" })
 	 public void testEvaluateRPNPositive() {
-		// tTableInfo.setTABLE_ID((long) 300001);
+		 tTableInfo.setTABLE_ID((long) 300001);
 		 tTableInfo.setAction("searchTableInformation");
-		 tTableInfo.setEvent("Save");
+		 tTableInfo.setEvent("searrch");
 		
 		 TableInfoVO tableInfoVO = (TableInfoVO) objBusinessDelegate.doProcess(tTableInfo);
          System.out.print(tableInfoVO);

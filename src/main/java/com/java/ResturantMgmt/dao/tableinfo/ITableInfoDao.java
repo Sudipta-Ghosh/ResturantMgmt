@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.java.ResturantMgmt.dto.TTableInfo;
 import com.java.ResturantMgmt.dto.TUserGroup;
-import com.java.ResturantMgmt.valueObject.usergroup.TableInfoVO;
+import com.java.ResturantMgmt.valueObject.tableinfo.TableInfoVO;
 import com.java.ResturantMgmt.valueObject.usergroup.UserGroupVO;
 
 public interface ITableInfoDao {

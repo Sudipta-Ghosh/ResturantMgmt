@@ -9,8 +9,10 @@ public class TableInfoDWR {
 		return tableString;
 		
 	} 
-	public String saveTableInformation(String tableno,String tabledescription,String noofitems,String tableStatus){
-		String tableString=new TableInfoBP().showTableInformation();
+	public String saveTableInformation(String tableno,String tabledescription,String noofseat,String tableStatus,String tabletype){
+		String createdBy="Sudipta";
+		String lastUpdatedBy="Sudipta";
+		String tableString=new TableInfoBP().saveTableInformation( tableno, tabledescription, noofseat, tableStatus,tabletype,createdBy,lastUpdatedBy);
 		return tableString;
 		
 	}

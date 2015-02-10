@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.java.ResturantMgmt.dao.tableinfo.ITableInfoDao;
 import com.java.ResturantMgmt.dto.TTableInfo;
-import com.java.ResturantMgmt.valueObject.usergroup.TableInfoVO;
+import com.java.ResturantMgmt.valueObject.tableinfo.TableInfoVO;
 
 
 @Repository("TableInfoDao")
@@ -22,7 +22,7 @@ public class TableInfoDao   implements ITableInfoDao{
 	public TableInfoVO save(TTableInfo tTableInfo ) {
 		// TODO Auto-generated method stub
 		TableInfoVO tableInfoVO =new TableInfoVO();
-		this.sessionFactory.getCurrentSession().save(tableInfoVO);
+		this.sessionFactory.getCurrentSession().save(tTableInfo);
 		tableInfoVO.setMessage("1 UserGroup Save Successfully");
 		return tableInfoVO;
 	}

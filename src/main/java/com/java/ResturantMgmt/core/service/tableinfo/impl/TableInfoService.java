@@ -10,7 +10,7 @@ import com.java.ResturantMgmt.core.service.GenericService;
 import com.java.ResturantMgmt.dao.impl.tableinfo.TableInfoDao;
 import com.java.ResturantMgmt.dto.TTableInfo;
 import com.java.ResturantMgmt.dto.util.GenericDTO;
-import com.java.ResturantMgmt.valueObject.usergroup.TableInfoVO;
+import com.java.ResturantMgmt.valueObject.tableinfo.TableInfoVO;
 import com.java.ResturantMgmt.valueObject.util.GenericVO;
 
 @Transactional
@@ -27,11 +27,26 @@ public class TableInfoService extends GenericService {
 	public GenericVO doProcess(GenericDTO genericdto) {
 		// TODO Auto-generated method stub
 		TableInfoVO tableInfoVO =new TableInfoVO();
-		List tTableInfo=searchTableInfo(genericdto);
-		tableInfoVO.settTableInfo(tTableInfo);
+		String strEvent=genericdto.getEvent();
+		List tTableInfo=new ArrayList();
+		if(strEvent!=null && strEvent.equals("Save")){
+			tableInfoVO=saveTableInfo(genericdto);
+		}else{
+			tTableInfo=searchTableInfo(genericdto);
+			tableInfoVO.settTableInfo(tTableInfo);
+		}
+		
 		return tableInfoVO;
 	}
 
+	private TableInfoVO saveTableInfo (GenericDTO genericdto) {
+		TableInfoVO tableInfoVO =new TableInfoVO();
+		
+		// TODO Auto-generated method stub
+		tableInfoVO=tableInfoDao.save((TTableInfo)genericdto);
+		
+		return tableInfoVO;
+	}
 	private List<TTableInfo> searchTableInfo(GenericDTO genericdto) {
 		List<TTableInfo> lstTableInfo =new ArrayList();
 		
