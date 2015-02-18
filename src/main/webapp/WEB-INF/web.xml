@@ -39,7 +39,7 @@ id="WebApp_ID" version="2.5">
 	</filter>  
 	<filter-mapping>  
 		<filter-name>struts2</filter-name>  
-		<url-pattern>/*</url-pattern>  
+		<url-pattern>*.action</url-pattern>  
 	</filter-mapping>  
 	<!-- Struts Tag Library Descriptors -->
 	<jsp-config>
@@ -65,21 +65,21 @@ id="WebApp_ID" version="2.5">
 
 
   <servlet>
-  <servlet-name> dwr-invoker </servlet-name>
-  <servlet-class> org.directwebremoting.servlet.DwrServlet </servlet-class>
+  <servlet-name>dwr-invoker</servlet-name>
+  <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
   <init-param>
     <param-name>crossDomainSessionSecurity</param-name>
     <param-value>false</param-value>
   </init-param>
   <init-param>
-     <param-name> debug </param-name>
-     <param-value> true </param-value>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
   </init-param>
 </servlet>
 
 <servlet-mapping>
   <servlet-name> dwr-invoker </servlet-name>
-  <url-pattern> /dwr/* </url-pattern>
+  <url-pattern>/dwr/*</url-pattern>
 </servlet-mapping>
 
    

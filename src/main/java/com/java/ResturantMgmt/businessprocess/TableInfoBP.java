@@ -69,14 +69,14 @@ public class TableInfoBP {
 
 	}
 
-	public String saveTableInformation(String tableno, String tabledescription,
+	public String saveTableInformation(String tableId,String tableno, String tabledescription,
 			String noofseat, String tableStatus, String tabletype,String createdBy,String lastUpdatedBy) {
 		// TODO Auto-generated method stub
 		
 		TTableInfo tTableInfo =new TTableInfo();
 		String result="";
 		StringBuilder stringBuilder =new StringBuilder();
-		
+		TableInfoVO tableInfoVO =new TableInfoVO();
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SS");
 		String strDate = sdf.format(cal.getTime());
@@ -89,7 +89,16 @@ public class TableInfoBP {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		if(tableId!=null && !tableId.equals("")){
+			 tTableInfo.setAction("searchTableInformation");
+			 tTableInfo.setEvent("Search");
+			 tTableInfo.setTABLE_ID(Long.valueOf(tableId));
+			  tableInfoVO = (TableInfoVO) objBusinessDelegate.doProcess(tTableInfo);
+			  tTableInfo=tableInfoVO.gettTableInfo().get(0);	
+			 
+		}
+		
 		 tTableInfo.setAction("saveTableInformation");
 		 tTableInfo.setEvent("Save");
 		 tTableInfo.setTABLE_NO(tableno);
@@ -101,7 +110,7 @@ public class TableInfoBP {
 		 tTableInfo.setLAST_UPDATED_BY(lastUpdatedBy);
 		 tTableInfo.setLAST_UPDATED_DATE(date);
 		 tTableInfo.setCREATED_DATE(date);
-		 TableInfoVO tableInfoVO = (TableInfoVO) objBusinessDelegate.doProcess(tTableInfo);
+		 tableInfoVO = (TableInfoVO) objBusinessDelegate.doProcess(tTableInfo);
 		return tableInfoVO.getMessage();
 	}
 

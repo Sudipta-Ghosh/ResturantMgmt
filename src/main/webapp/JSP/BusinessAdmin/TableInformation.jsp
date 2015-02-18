@@ -15,20 +15,20 @@
 	<!--[if IE 6]><link rel="stylesheet" href="style.ie6.css" type="text/css" media="screen" /><![endif]-->
 	<!--[if IE 7]><link rel="stylesheet" href="style.ie7.css" type="text/css" media="screen" /><![endif]-->
 
-	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="../../js/userdefined/FormScript.js"></script>
 
 	<script type='text/javascript' src='/ResturantMgmt/dwr/interface/TableInfoDWR.js'></script>
 	<script type='text/javascript' src='/ResturantMgmt/dwr/engine.js'></script>
 	<script type='text/javascript' src='/ResturantMgmt/dwr/util.js'></script>
 	
-	<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="../Common/script1.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<script type="text/javascript" language="javascript" src="../../js/Jquery/jquery-1.10.2.min.js"></script>
+	<script src="../../js/userdefined/MenuJS.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../css/Jquery/jquery-ui.css">
 	
-	<script type="text/javascript" src=" 	http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/725b2a2115b/integration/jqueryui/dataTables.jqueryui.css">
-	<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/725b2a2115b/integration/jqueryui/dataTables.jqueryui.js"></script>
+	<script type="text/javascript" src="../../js/Jquery/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../css/datatable/dataTables.jqueryui.css">
+	<script type="text/javascript" language="javascript" src="../../js/datatables/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="../../js/datatables/dataTables.jqueryui.js"></script>
 
 
     <script type="text/javascript">
@@ -56,7 +56,7 @@
 });
    
    function editTableInfo(tableId){
-   url="TableInfoController?param="+tableId;
+   url="TableInfoController?tableId="+tableId;
     alert(url);
      window.open(url, 'window', 'width=800,height=800');
    }

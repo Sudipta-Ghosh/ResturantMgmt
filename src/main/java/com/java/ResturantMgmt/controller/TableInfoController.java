@@ -2,6 +2,9 @@ package com.java.ResturantMgmt.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.java.ResturantMgmt.core.businessdelegate.BusinessDelegate;
+import com.java.ResturantMgmt.dto.TTableInfo;
+import com.java.ResturantMgmt.valueObject.tableinfo.TableInfoVO;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
@@ -20,7 +23,17 @@ public class TableInfoController extends ActionSupport implements ServletRequest
 
 	
 	public String execute() {
-		String param = getServletRequest().getParameter("param");
+		String tableId = getServletRequest().getParameter("tableId");
+		BusinessDelegate objBusinessDelegate=new BusinessDelegate();
+		TTableInfo tTableInfo =new TTableInfo();
+		 tTableInfo.setAction("searchTableInformation");
+		 tTableInfo.setEvent("Search");
+
+		tTableInfo.setTABLE_ID(Long.valueOf(tableId));
+		TableInfoVO tableInfoVO = (TableInfoVO) objBusinessDelegate.doProcess(tTableInfo);
+		for ( TTableInfo tTableInfoOut:tableInfoVO.gettTableInfo()){
+			request.setAttribute("tableInfo", tTableInfoOut);
+		}
 		return "SUCCESS";
  
 	}

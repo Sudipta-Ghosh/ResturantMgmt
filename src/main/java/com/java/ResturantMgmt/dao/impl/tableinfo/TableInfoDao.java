@@ -22,7 +22,7 @@ public class TableInfoDao   implements ITableInfoDao{
 	public TableInfoVO save(TTableInfo tTableInfo ) {
 		// TODO Auto-generated method stub
 		TableInfoVO tableInfoVO =new TableInfoVO();
-		this.sessionFactory.getCurrentSession().save(tTableInfo);
+		this.sessionFactory.getCurrentSession().merge(tTableInfo);
 		tableInfoVO.setMessage("1 UserGroup Save Successfully");
 		return tableInfoVO;
 	}

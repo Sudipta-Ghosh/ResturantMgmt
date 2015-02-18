@@ -6,15 +6,15 @@
         <meta name="description" content="Fancy Sliding Form with jQuery" />
         <meta name="keywords" content="jquery, form, sliding, usability, css3, validation, javascript"/>
         <link rel="stylesheet" href="../../css/CreateFormStyle.css" type="text/css" media="screen"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>	
-	<script type="text/javascript" src="../../js/sliding.form.js"></script>
+        <script src="../../js/Jquery/jquery-1.10.2.min.js"></script>	
+	<script type="text/javascript" src="../../js/userdefined/sliding.form.js"></script>
 	
 	<link rel="stylesheet" href="../../css/validationEngine.jquery.css" type="text/css">
 	<link rel="stylesheet" href="../../css/template.css" type="text/css">
-	<script src="../../js/jquery-1.8.2.min.js" type="text/javascript">	</script>
-	<script src="../../js/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8">	</script>
-	<script src="../../js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="script.js"></script>
+	<script src="../../js/Jquery/jquery-1.8.2.min.js" type="text/javascript">	</script>
+	<script src="../../js/Jquery/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8">	</script>
+	<script src="../../js/Jquery/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../../js/userdefined/FormScript.js"></script>
 	<script type='text/javascript' src='/ResturantMgmt/dwr/interface/TableInfoDWR.js'></script>
 	<script type='text/javascript' src='/ResturantMgmt/dwr/engine.js'></script>
 	<script type='text/javascript' src='/ResturantMgmt/dwr/util.js'></script>
@@ -49,16 +49,16 @@
     		jQuery("#formElem").validationEngine();
     	});
     	
-    	function update(){
-    	
-		var tableno=document.getElementById("tableno").value; 
+    	function updateTable(){
+ 		var tableno=document.getElementById("tableno").value; 
 		var tabledescription=document.getElementById("tabledescription").value; 
 		var noofseats=document.getElementById("noofseats").value; 
 		var tablestatus=document.getElementById("tablestatus").value; 
 		var tabletype=document.getElementById("tabletype").value; 
-		 TableInfoDWR.saveTableInformation(tableno,tabledescription,noofseats,tablestatus,tabletype,{ 
-			      async: false,
-			      callback: function(data){  	              
+		var tableId=document.getElementById("tableId").value; 
+		 TableInfoDWR.saveTableInformation(tableId,tableno,tabledescription,noofseats,tablestatus,tabletype,{ 
+			     async: false,
+			     callback: function(data){  	              
 				 window.opener.location.reload();
 				 window.close();
 			      }
@@ -76,15 +76,15 @@
 			<legend>Table Master</legend>
 			<p>
 				<label for="tableno">Table No</label>
-				<input id="tableno" name="tableno"  class="validate[required] minSize[6]" type="text" value="" />
+				<input id="tableno" name="tableno"  class="validate[required] minSize[6]" type="text" value="${requestScope.tableInfo.TABLE_NO}" />
 			</p>
 			<p>
 				<label for="tabledescription">Table Description</label>
-				<input id="tabledescription" name="tabledescription"  class="validate[required] text-input" type="text" />
+				<input id="tabledescription" name="tabledescription"  class="validate[required] text-input" type="text" value= "${requestScope.tableInfo.TABLE_DESCRIPTION}" />
 			</p>
 			<p>
 				<label for="noofseats">No Of Seats</label>
-				<input id="noofseats" name="noofseats" class="validate[required] text-input" type="text" />
+				<input id="noofseats" name="noofseats" class="validate[required] text-input" type="text" value= "${requestScope.tableInfo.TABLE_NO_OF_SEAT}" />
 			</p>
 			<p>
 				<label for="tablestatus">Table Status</label>
@@ -95,9 +95,11 @@
 			</p>				
 			<p>
 				<label for="tabletype">Table Type</label>
-				<input id="tabletype" name="tabletype"  class="validate[required] text-input" type="text"/>
+				<input id="tabletype" name="tabletype"  class="validate[required] text-input" type="text" value= "${requestScope.tableInfo.TABLE_TYPE}"/>
 			</p>
                         </fieldset>
+                        
+                        <input type="hidden" name="tableId" id="tableId" value="${requestScope.tableInfo.TABLE_ID}">
                        
 			<fieldset class="step">
                             <legend>Confirm</legend>
@@ -110,7 +112,7 @@
 								the form.
 							</p>
                             <p class="submit">
-                                <button id="registerButton" type="submit" onclick="javascript:update();" >Save</button>
+                                <button id="registerButton" type="submit" onclick="javascript:updateTable();" >Save</button>
                             </p>
                         </fieldset>
                     </form>
